@@ -12,7 +12,7 @@ from Obstacle import ONE_GRID, GRID_SIZE
 from Enemy import Enemies
 from Obstacle import Obstacle
 from Bomb import Bomb
-from server import server
+
 
 BOMB_COUNT = 3
 
@@ -60,10 +60,6 @@ class Player(QGraphicsItem):
         self.filename = 'player_movements.xml'
 
 
-        HOST = '192.168.0.100'
-        PORT = 5353
-
-        server(HOST, PORT)
 
         """def movePlayerFromXML(self, filename):
         # Parse the XML file

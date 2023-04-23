@@ -1,11 +1,32 @@
 import socket
 import threading
+import json
 
 def handle_client(conn, addr):
     print(f"Connected by {addr}")
-    data = conn.recv(1024)
-    print(f"Received data: {data.decode()}")
-    conn.sendall(b"Hello, client!")
+
+    while True:
+        data = conn.recv(1024)
+        if not data:
+            print(f"Client {addr} disconnected")
+            break
+
+        print(f"Received data: {data.decode()}")
+
+        # Process received data
+        try:
+            data_json = json.loads(data.decode())
+            if "message" in data_json:
+                response = {"message": f"Hello, {data_json['message']}!"}
+            else:
+                response = {"error": "Invalid message format"}
+        except json.JSONDecodeError:
+            response = {"error": "Invalid JSON format"}
+
+        # Send response
+        response_json = json.dumps(response)
+        conn.sendall(response_json.encode())
+
     conn.close()
 
 def server(HOST, PORT):

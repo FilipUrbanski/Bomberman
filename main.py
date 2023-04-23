@@ -1,7 +1,9 @@
 import sys
 import json
 from PyQt5.QtWidgets import QApplication, QInputDialog
+from PyQt5.QtCore import QThread
 import socket
+from server import server
 
 SETTINGS_FILE = "settings.json"
 
@@ -14,9 +16,20 @@ def load_settings():
     except FileNotFoundError:
         return None
 
+
 def save_settings(settings):
     with open(SETTINGS_FILE, "w") as f:
         json.dump(settings, f)
+
+
+class ServerThread(QThread):
+    def __init__(self, host, port):
+        super().__init__()
+        self.host = host
+        self.port = port
+
+    def run(self):
+        server(self.host, self.port)
 
 
 settings = load_settings()
@@ -35,19 +48,7 @@ ENEMY_DENSITY = 0.05
 ENEMY_SPEED = 2
 
 if __name__ == "__main__":
-
     app = QApplication(sys.argv)
-
-    """s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-    ip_address = input("Podaj adres IP gracza: ")
-    port = int(input("Podaj port: "))
-
-    s.connect((ip_address, port))
-
-    while True:
-        data = s.recv(1024)
-        s.sendall(b"Hello, world")"""
 
     from MainWindow import MainWindow
 
@@ -67,5 +68,13 @@ if __name__ == "__main__":
             settings = {"zoom": ZOOM, "grid_size": GRID_SIZE}
             save_settings(settings)
 
+    HOST = '192.168.0.100'
+    PORT = 5353
+
+    server_thread = ServerThread(HOST, PORT)
+    server_thread.start()
+
+
+
+
     sys.exit(app.exec_())
-    s.close()
