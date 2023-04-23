@@ -1,0 +1,16 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+	<qresource>
+		<file>img\follow.png</file>
+		<file>img\static.png</file>
+		<file>img\horizontal_vertical.png</file>
+		<file>img\bg.png</file>
+		<file>img\szczurstoi.png</file>
+		<file>img\szczuridzie1.png</file>
+		<file>img\szczuridzie2.png</file>
+		<file>img\murek.png</file>
+		<file>img\murekmocno.png</file>
+		<file>img\murelekkok.png</file>
+		<file>img\bomb.png</file>
+    </qresource>
+</RCC>
