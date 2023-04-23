@@ -3,6 +3,7 @@ import random
 import resources_rc
 import datetime
 import xml.etree.ElementTree as ET
+import socket
 
 from PyQt5.QtWidgets import QLineEdit, QMainWindow, QGraphicsView, QGraphicsScene, QPushButton, QGraphicsPixmapItem, QLabel, QGraphicsTextItem
 from PyQt5.QtGui import QColor, QBrush, QPen, QPixmap, QPainter
@@ -13,6 +14,7 @@ from Player2 import Player2, BOMB_COUNT
 from Obstacle import generate_obstacles
 from Enemy import generate_enemies, Enemies
 from main import GRID_SIZE, ONE_GRID, GRID_SIZE_2
+
 
 
 class MainWindow(QMainWindow):
@@ -31,15 +33,6 @@ class MainWindow(QMainWindow):
         self.view.setScene(self.scene)
         self.scene.addItem(self.bg_item)
 
-        """self.check_timer = QTimer()
-        self.check_timer.timeout.connect(self.main_loop)
-        self.check_timer.start(50)"""
-
-        """pen = QPen(QColor(200, 200, 200), 0.5, Qt.SolidLine)
-        for x in range(0, GRID_SIZE * ONE_GRID + ONE_GRID, ONE_GRID):
-            self.scene.addLine(x, 0, x, GRID_SIZE * ONE_GRID + ONE_GRID, pen)
-        for y in range(0, GRID_SIZE * ONE_GRID + ONE_GRID, ONE_GRID):
-            self.scene.addLine(0, y, GRID_SIZE * ONE_GRID + ONE_GRID, y, pen)"""
 
         self.player = Player()
         self.player.setPos(0, 0)
@@ -60,7 +53,6 @@ class MainWindow(QMainWindow):
         #print(options("grid_size"))
 
     def handle_keypress(self, event):
-        # Pass the event to both players
         self.player.keyPressEvent(event)
         self.player2.keyPressEvent(event)
 
