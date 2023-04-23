@@ -16,8 +16,11 @@ def handle_client(conn, addr):
         # Process received data
         try:
             data_json = json.loads(data.decode())
-            if "message" in data_json:
-                response = {"message": f"Hello, {data_json['message']}!"}
+            if "pos_x" in data_json and "pos_y" in data_json:
+                pos_x = data_json["pos_x"]
+                pos_y = data_json["pos_y"]
+                print(f"Player position: ({pos_x}, {pos_y})")
+                response = {"message": "Position saved"}
             else:
                 response = {"error": "Invalid message format"}
         except json.JSONDecodeError:

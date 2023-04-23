@@ -74,7 +74,4 @@ if __name__ == "__main__":
     server_thread = ServerThread(HOST, PORT)
     server_thread.start()
 
-
-
-
     sys.exit(app.exec_())

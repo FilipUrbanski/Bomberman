@@ -14,12 +14,14 @@ from Player2 import Player2, BOMB_COUNT
 from Obstacle import generate_obstacles
 from Enemy import generate_enemies, Enemies
 from main import GRID_SIZE, ONE_GRID, GRID_SIZE_2
-
+from client import client, HOST, PORT
 
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.PORT = PORT
+        self.HOST= HOST
 
         self.bg_item = QGraphicsPixmapItem(QPixmap(":/img/bg.png").scaled(GRID_SIZE * ONE_GRID + ONE_GRID, GRID_SIZE * ONE_GRID + ONE_GRID))
 
@@ -37,6 +39,8 @@ class MainWindow(QMainWindow):
         self.player = Player()
         self.player.setPos(0, 0)
         self.scene.addItem(self.player)
+
+        client(self.HOST, self.PORT, self.player.pos_x, self.player.pos_y)
 
         self.player2 = Player2()
         self.player2.setPos(GRID_SIZE * ONE_GRID, GRID_SIZE * ONE_GRID)

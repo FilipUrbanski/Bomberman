@@ -60,7 +60,6 @@ class Player(QGraphicsItem):
         self.filename = 'player_movements.xml'
 
 
-
         """def movePlayerFromXML(self, filename):
         # Parse the XML file
         tree = ET.parse(filename)
