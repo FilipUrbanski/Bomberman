@@ -1,5 +1,6 @@
 import random
 import resources_rc
+import math
 
 from PyQt5.QtWidgets import QGraphicsItem
 from PyQt5.QtGui import QPixmap
@@ -13,6 +14,8 @@ class Enemies(QGraphicsItem):
         super().__init__(parent)
         self.enemy_type = enemy_type
         self.setZValue(-1)
+        self.pos_x = 0
+        self.pos_y = 0
         if enemy_type == "static":
             self.size = ONE_GRID
             self.color = Qt.darkGray
@@ -44,10 +47,14 @@ class Enemies(QGraphicsItem):
             current_pos = self.pos()
             new_pos = current_pos + Qt.RightEdge * self.speed
             self.setPos(new_pos)
+            self.pos_x = self.pos().x()
+            self.pos_y = self.pos().y()
+
 
 
 def generate_enemies(scene):
     enemies_probs = {"static": 0.5, "horizontal": 0.2, "vertical": 0.2, "follow": 0.1}
+    enemy_positions = []
     for x in range(1, GRID_SIZE - 1):
         for y in range(1, GRID_SIZE - 1):
             if random.random() < ENEMY_DENSITY:
@@ -55,4 +62,7 @@ def generate_enemies(scene):
                 enemy = Enemies(enemy_type)
                 enemy.setPos(x * ONE_GRID, y * ONE_GRID)
                 scene.addItem(enemy)
+                enemy_positions.append((x, y))
+    return scene, enemy_positions
+
 

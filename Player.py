@@ -16,9 +16,9 @@ from Bomb import Bomb
 
 BOMB_COUNT = 3
 
-XML = bool(input(print("Save to XML?")))
-JSON = bool(input(print("Save to JSON?")))
-SQL = bool(input(print("Save to SQLite3?")))
+XML = bool((print("Save to XML?")))
+JSON = bool((print("Save to JSON?")))
+SQL = bool((print("Save to SQLite3?")))
 
 
 

@@ -21,7 +21,7 @@ def save_settings(settings):
     with open(SETTINGS_FILE, "w") as f:
         json.dump(settings, f)
 
-
+"""
 class ServerThread(QThread):
     def __init__(self, host, port):
         super().__init__()
@@ -29,7 +29,7 @@ class ServerThread(QThread):
         self.port = port
 
     def run(self):
-        server(self.host, self.port)
+        server(self.host, self.port)"""
 
 
 settings = load_settings()
@@ -44,7 +44,7 @@ else:
 GRID_SIZE_2 = int(GRID_SIZE / 2)
 ONE_GRID = int(ZOOM / GRID_SIZE)
 OBSTACLE_DENSITY = 0.15
-ENEMY_DENSITY = 0.05
+ENEMY_DENSITY = 0.1
 ENEMY_SPEED = 2
 
 if __name__ == "__main__":
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     HOST = '192.168.0.100'
     PORT = 5353
 
-    server_thread = ServerThread(HOST, PORT)
-    server_thread.start()
+#    server_thread = ServerThread(HOST, PORT)
+#    server_thread.start()
 
     sys.exit(app.exec_())
